@@ -8,23 +8,48 @@ import {
 } from "../../redux/reducers/userReducer";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Form, Input } from "antd";
+import { USER_PROFILE } from "../../util/config";
+import { Avatar, Form, Button, Input, Modal, Select, Table, Tag } from 'antd';
 const Profile = () => {
   const { userProfile } = useSelector((state) => state.userReducer);
-
   const dispatch = useDispatch();
   const [form] = Form.useForm();
-  useEffect(() => {
-    const actionAsync = getProfileApi();
-
-    dispatch(actionAsync);
-    form.setFieldValue(userProfile);
-  }, []);
-
+  // const form = useFormik({
+  //   initialValues:{
+  //     email:'',
+  //     password:'',
+  //     name:'',
+  //     phone:'',
+  //     gender:true
+  //   },
+  //   onSubmit:(values)=>{
+  //     const updateProfile = updateProfileApi(values)
+  //     dispatch(updateProfile)
+     
+    
+    
+  //   },
+  //   validationSchema:yup.object().shape({
+  //     email:yup.string().required('Email cannot be blank').email('Email is invalid')
+  //     ,password:yup.string().required('Password cannot be blank'),name:yup.string().required('Name cannot be blank')
+  //     ,phone:yup.string().required('Phone cannot be blank').matches(/^[0-9]+$/),
+  //   }
+  //   )
+  // })
+  
   const onSubmit = (values) => {
-    const updateProfile = updateProfileApi(values);
-    dispatch(updateProfile);
-  };
+    const updateProfile = updateProfileApi(values)
+         dispatch(updateProfile)
+  }
+  useEffect(() => {
+    const getProfile = getProfileApi()
+    if (!USER_PROFILE) {
+      dispatch(getProfile);
+    }
+    form.setFieldsValue(userProfile)
+  }, [])
+
+  
 
   return (
     <>
@@ -41,77 +66,46 @@ const Profile = () => {
       >
         Profile
       </h3>
-      <div className="row mt-5">
-        <div className="col-2">
-          <img
-            className="w-100 rounded-circle"
-            src={userProfile?.avatar}
-            alt="..."
-          />
-        </div>
-        <div className="col-5">
-          <Form onFinish={onSubmit}>
-            <Form.Item label="Email" name="email">
-              <Input
-                style={{
-                  padding: "16px 12px 14px 14px",
-                  background: " rgba(33, 33, 33, 0.08)",
-                  borderRadius: " 4px 4px 0px 0px",
-                }}
-              />
-            </Form.Item>
-            <Form.Item label="Phone" name="phone">
-              <Input style={{
-                  padding: "16px 12px 14px 14px",
-                  background: " rgba(33, 33, 33, 0.08)",
-                  borderRadius: " 4px 4px 0px 0px",
-                }}/>
-            </Form.Item>
-          </Form>
-        </div>
-        <div className="col-5">
-          <Form onFinish={onSubmit}>
-            <Form.Item label="Name" name="name">
-              <Input style={{
-                  padding: "16px 12px 14px 14px",
-                  background: " rgba(33, 33, 33, 0.08)",
-                  borderRadius: " 4px 4px 0px 0px",
-                }}/>
-            </Form.Item>
-            <Form.Item label="Password" name="password">
-              <Input style={{
-                  padding: "16px 12px 14px 14px",
-                  background: " rgba(33, 33, 33, 0.08)",
-                  borderRadius: " 4px 4px 0px 0px",
-                }}/>
-            </Form.Item>
-            <div className="row">
-              <div className="col-7">
-                <Form.Item name="gender" label="Gender">
-                  <div className="row">
-                    <div className="col-3">
-                      <input type="radio"/>
-
-                      <p>Male</p>
-                    </div>
-                    <div className="col-3">
-                      <input type="radio"/>
-                      <p>Female</p>
-                    </div>
-                  </div>
-                </Form.Item>
-              </div>
-              <div className="col-5">
-                <Form.Item>
-                  <button className="btn btn-success" style={{ background:' #6200EE'}} type="submit">
-                   
-                    Update
-                  </button>
-                </Form.Item>
-              </div>
+      <div className="container-fluid mt-5 ms-2">
+        <div className="row">
+          <div className=" col-xl-3 col-xs-12 ">
+            <div className="avatar avatar-profile m-auto">
+              <img src={userProfile?.avatar} alt="..." className='w-75 rounded-circle'></img>
             </div>
-          </Form>
-          
+          </div>
+          <div className=" col-xl-4 col-xs-12 ">
+            <Form layout="vertical" name="basic" form={form} wrapperCol={{ span: 25 }} onFinish={onSubmit}>
+              <Form.Item label="Email" name="email">
+                <Input />
+              </Form.Item>
+
+              <Form.Item label="Phone" name="phone">
+                <Input />
+              </Form.Item>
+
+              <Form.Item>
+                <button className="btn btn-primary mt-3" type="submit"> Update </button>
+              </Form.Item>
+            </Form>
+          </div>
+          <div className=" col-xl-4 col-xs-12 ">
+            <Form layout="vertical" name="basic" form={form} wrapperCol={{ span: 25 }} onFinish={onSubmit}>
+              <Form.Item label="Name" name="name">
+                <Input/>
+              </Form.Item>
+
+              <Form.Item label="Password" name="newPassword" >
+                <Input.Password id="password" />
+              </Form.Item>
+
+              <Form.Item name="gender" label="Gender" hasFeedback >
+                <Select placeholder="Gender">
+                  <Select.Option value={false}>Male</Select.Option>
+                  <Select.Option value={true}>Female</Select.Option>
+                </Select>
+              </Form.Item>
+            </Form>
+          </div>
         </div>
       </div>
       <hr className="mx-5" />

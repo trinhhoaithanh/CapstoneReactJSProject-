@@ -81,12 +81,15 @@ export const registerApi=(userRegister)=>{
         
     }
 }
-export const updateProfileApi=(updateProfile)=>{
+export const updateProfileApi = (updateProfile) => {
     return async dispatch => {
-    const result = await http.post('/api/Users/updateProfile', updateProfile);
-      const action = updateProfileAction(result.data.content);
-      dispatch(action);
-      
-  
-  }
-}
+      await http.post('/api/Users/updateProfile', updateProfile).then((res) => {
+        const action = updateProfileAction(res.data.content);
+        dispatch(action);
+        alert("Update successfully");
+      }).catch((err) => {
+        alert(`${err.response.data.content}`);
+        return;
+      })
+    }
+  };
