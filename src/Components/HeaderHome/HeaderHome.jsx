@@ -22,10 +22,7 @@ const HeaderHome = () => {
             </>
         }
         return <>
-        {/* <NavLink to="/search" style={{textDecoration:'none'}}>
-                            <img src="/img/search.png" alt="" />
-                            <span style={{marginRight:'10px'}} className="text-white">Search</span>
-        </NavLink> */}
+        
         <NavLink to="/login" className="nav-link mx-3 text-white">Login</NavLink>
         <NavLink to="/register" className="nav-link mx-3 text-white">Register</NavLink>
         </>
@@ -45,7 +42,10 @@ const HeaderHome = () => {
                         
                     </ul>
                     <form className="d-flex my-2 my-lg-0">
-                        
+                    <NavLink to="/search" style={{textDecoration:'none'}}>
+                            <img src="/img/search.png" alt="" />
+                            <span style={{marginRight:'10px'}} className="text-white">Search</span>
+                    </NavLink>
                         {renderLoginButton()}
                     </form>
                 </div>
