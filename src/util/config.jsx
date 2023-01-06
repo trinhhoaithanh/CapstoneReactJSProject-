@@ -6,7 +6,7 @@ export const ACCESS_TOKEN = 'accessToken';
 export const USER_LOGIN = 'userLogin';
 export const USER_PROFILE = "userProfile";
 export const USER_REGISTER  = "userRegister";
-
+export const USER_UPDATE  = "userUpdate";
 
 export const { saveStore,saveStoreJson,getStore,getStoreJson,removeStore} = {
     saveStore: (name, stringValue) => {
@@ -57,16 +57,9 @@ http.interceptors.request.use((config) => {
     return Promise.reject(err);
 })
 
-// export const httpb = axios.create({
-//     baseURL:'https://shop2.cyberlearn.vn'
-// })
+
 //Cấu hình cho tất cả các response api
 http.interceptors.response.use((res)=>{
-   
-        
-    
-       
-    
     return res;
 }, (err) => {
     

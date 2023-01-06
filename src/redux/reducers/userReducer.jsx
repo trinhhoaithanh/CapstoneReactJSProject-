@@ -74,8 +74,8 @@ export const registerApi=(userRegister)=>{
         console.log(action);
         dispatch(action);
         
-        //Lưu localstorage
-        saveStoreJson(USER_REGISTER,result.data.content);
+        // //Lưu localstorage
+        // saveStoreJson(USER_REGISTER,result.data.content);
         alert("Đăng ký tài khoản thành công");
         history.push('/login'); 
         

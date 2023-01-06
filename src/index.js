@@ -15,9 +15,7 @@ import { Provider } from 'react-redux'
 import { store } from './redux/configStore';
 //Cấu hình history
 import { createBrowserHistory } from 'history';
-import DemoModalHoc from './Pages/DemoModalHoc/DemoModalHoc';
-import DemoContainerComponent from './Pages/DemoContainerComponent/DemoContainerComponent';
-import ContainerModal from './HOC/ContainerModal';
+
 export const history = createBrowserHistory();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -26,7 +24,7 @@ root.render(
     <HistoryRouter history={history}>
       <Routes>
         <Route path='' element={<HomeTemplate />}>
-          <Route index element={<Home />}></Route>
+          <Route index element={<Home/>}></Route>
           <Route path='login' element={<Login />}></Route>
           <Route path='register' element={<Register />}></Route>
           <Route path='profile' element={<Profile />}></Route>
@@ -35,8 +33,7 @@ root.render(
           <Route path='detail' >
             <Route path=':id' element={<Detail />}></Route>
           </Route>
-          <Route path='demo-modal-hoc' element={<DemoModalHoc />}></Route>
-          <Route path='demo-modal-container' element={<DemoContainerComponent />}></Route>
+         
 
           <Route path='*' element={<Navigate to="/" />}></Route>
     

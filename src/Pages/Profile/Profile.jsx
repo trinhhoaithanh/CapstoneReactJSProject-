@@ -1,15 +1,14 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductApi } from "../../redux/reducers/productReducer";
 import {
   getProfileApi,
   updateProfileApi,
 } from "../../redux/reducers/userReducer";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { USER_PROFILE } from "../../util/config";
-import { Avatar, Form, Button, Input, Modal, Select, Table, Tag } from 'antd';
+
+import { Form, Input,  Select } from 'antd';
 const Profile = () => {
   const { userProfile } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
@@ -43,11 +42,11 @@ const Profile = () => {
   }
   useEffect(() => {
     const getProfile = getProfileApi()
-    if (!USER_PROFILE) {
+    
       dispatch(getProfile);
-    }
+    
     form.setFieldsValue(userProfile)
-  }, [])
+  },[])
 
   
 

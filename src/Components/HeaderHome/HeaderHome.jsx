@@ -21,7 +21,12 @@ const HeaderHome = () => {
                 }}>Logout</span>
             </>
         }
-        return <><NavLink to="/login" className="nav-link mx-3 text-white">Login</NavLink>
+        return <>
+        {/* <NavLink to="/search" style={{textDecoration:'none'}}>
+                            <img src="/img/search.png" alt="" />
+                            <span style={{marginRight:'10px'}} className="text-white">Search</span>
+        </NavLink> */}
+        <NavLink to="/login" className="nav-link mx-3 text-white">Login</NavLink>
         <NavLink to="/register" className="nav-link mx-3 text-white">Register</NavLink>
         </>
     }
@@ -37,14 +42,10 @@ const HeaderHome = () => {
                         <li className="nav-item">
                             <NavLink className="nav-link active" to="/" aria-current="page">Home </NavLink>
                         </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link active" to="/demo-modal-hoc" aria-current="page">HOC </NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link active" to="/demo-modal-container" aria-current="page">HOC </NavLink>
-                        </li>
+                        
                     </ul>
                     <form className="d-flex my-2 my-lg-0">
+                        
                         {renderLoginButton()}
                     </form>
                 </div>
