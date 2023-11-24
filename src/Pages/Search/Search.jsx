@@ -55,7 +55,7 @@ const Search = () => {
 
             <Row gutter={[16, 24]} style={{marginTop:'20px', marginBottom: '190px' }}>
                 {arrProductSearch?.map((item, index) => {
-                    return <Col className='gutter-row' span={8} key={index}>
+                    return <Col className='gutter-row' span={8} key={index} xs={24} sm={24} md={12} lg={8} xl={8}>
                         <ShoesCard prod={item} />
                     </Col>
                 })}
